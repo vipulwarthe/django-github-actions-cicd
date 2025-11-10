@@ -4,17 +4,28 @@ FROM python:3.10-slim
 # Set working directory
 WORKDIR /app
 
-# Copy requirements first (better cache)
+# Install system dependencies required for catboost, xgboost, numpy, pandas
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    g++ \
+    python3-dev \
+    libatlas-base-dev \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first
 COPY requirements.txt .
 
-# Install dependencies
+# Install Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire project
+# Copy project files
 COPY . .
 
-# Expose application port
+# Expose Flask port
 EXPOSE 5000
 
-# Command to run Flask app
+# Run Flask app
 CMD ["python", "application.py"]
+
