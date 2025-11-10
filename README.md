@@ -1,2 +1,2 @@
-# django-github-actions-cicd
+# sp-github-actions-cicd-project
 
