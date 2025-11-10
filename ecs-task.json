@@ -1,0 +1,25 @@
+{
+  "family": "student-app-task",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "student-app",
+      "image": "<IMAGE_URI>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "hostPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "memory": 512,
+      "cpu": 256
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "memory": "1024",
+  "cpu": "512",
+  "executionRoleArn": "arn:aws:iam::717279727098:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::717279727098:role/ecsTaskExecutionRole"
+}
